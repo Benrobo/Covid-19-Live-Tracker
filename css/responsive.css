@@ -1,0 +1,65 @@
+/* mobile */
+@media only screen and (min-device-width: 320px) 
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait){
+    .section{
+        width:100% !important;
+    }
+    .section .counts-cont{
+        position: relative;
+        transform:translate(0,0);
+        top:0px;
+        width:100% !important;
+        flex-direction: column;
+        background: none;
+        box-shadow: none !important;
+    }
+    .section .counts-cont .box{
+        padding:10px;
+        box-shadow: 0px 0px 3px #777;
+        width:250px;
+        height:200px;
+        margin:10px auto;
+        border-radius:10px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .section .main{
+        width: 90% !important;
+     
+    }
+    .section .map-cont{
+        width: 100% !important;
+    }
+    .section .countries-cont{
+        width: 100% !important;
+    }
+    .section .countries-cont form .countries{
+        width:270px !important;
+    }
+}
+
+
+/* ipad */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .section .counts-cont{
+        width:50% !important;
+    }
+}
+/* pc */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    .section .counts-cont{
+        width:50% !important;
+    }
+}

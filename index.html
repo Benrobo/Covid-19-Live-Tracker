@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 Tracker</title>
+    <link rel="icon"
+        href="https://img-premium.flaticon.com/png/512/2853/2853896.png?token=exp=1621251844~hmac=29db70baf58b202016090e3dc351f98f"
+        type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- iionsicon -->
+    <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
+</head>
+
+<body>
+
+    <!-- header -->
+    <header class="header">
+        <!-- navbaR -->
+        <nav class="nav navbar">
+            <a href="#" class="navbar-brand">
+                Covid-19 Tracker
+            </a>
+
+            <button class="mode btn btn-default">
+                <ion-icon name="star-outline"></ion-icon>
+                </ion-icon>
+            </button>
+        </nav>
+
+        <div class="overlay">
+            <div class="contents">
+                <h1>COVID-19 LIVE TRACKER</h1>
+                <br>
+                <p>The Coronavirus (COVID-19) was first reported in Wuhan, Hubei, China in December 2019, the outbreak
+                    was later recognized as a pandemic by the World Health Organization (WHO) on 11 March 2020.</p>
+            </div>
+        </div>
+    </header>
+    <section class="section">
+        <div class="counts-cont">
+            <div class="box">
+                <div class="icon"><img src="https://img.icons8.com/wired/50/4a90e2/globe.png" /></div>
+                <div class="stat">
+                    <small>Stats Overview</small>
+                    <h4 class="stat-val">Global</h4>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon"><img src="https://img.icons8.com/carbon-copy/50/000000/coronavirus.png" /></div>
+                <div class="stat">
+                    <small>Total Coronavirus Cases</small>
+                    <h4 class="stat-val">1,245,347</h4>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon"><img src="https://img.icons8.com/carbon-copy/50/26e07f/coronavirus.png" /></div>
+                <div class="stat">
+                    <small>Total Recovered</small>
+                    <h4 class="stat-val">1,245</h4>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon"><img src="https://img.icons8.com/carbon-copy/50/fa314a/coronavirus.png" /></div>
+                <div class="stat">
+                    <small>Total Death</small>
+                    <h4 class="stat-val">1,245,347</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- main -->
+        <br>
+        <br>
+        <br>
+        <div class="main">
+            <div class="map-cont">
+                <p><b>Covid-19 Affected Areas.</b></p>
+                <br>
+                <div class="map-area"></div>
+            </div>
+            <div class="countries-cont">
+                <div class="form-cont">
+                    <form class="form-inline">
+                        <select class="form-control countries">
+                            <option value="">Select Country</option>
+                            <option value="">Global</option>
+                            <option value="Afganistan">Afganistan</option>
+                        </select>
+                        <button class="btn btn-primary ml-1">Filter</button>
+                    </form>
+                </div>
+                <br>
+                <div class="affected-cont">
+                    <div class="card-cont">
+                        <div class="clear-fix">
+                            <div class="float-left">
+                                <img src="https://restcountries.eu/data/nga.svg" alt="flag">
+                                <small class="ml-1">Country name</small>
+                            </div>
+
+                            <div class="float-right">
+                                <small class="mr-1">1123.5</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-cont mt-5">
+                <h5>COVID-19 Global Stats</h5>
+                <br>
+                <div class="chart-js"></div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </section>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>
