@@ -85,11 +85,10 @@ body{
 
 
 .section .main{
-    width: 90%;
+    width: 100%;
     margin:0px auto;
     display:flex;
     flex-wrap: wrap;
- 
 }
 
 .section .map-cont{
@@ -107,19 +106,23 @@ body{
     height:400px;
 }
 .section .countries-cont{
+    width: 300px;
     padding:12px;
     background:#fff;
     margin:10px auto;
     box-shadow: 0px 0px 7px #cccccca8;
     border-radius:7px;
-    overflow-y: scroll;
 }
 
-.section .countries-cont::-webkit-scrollbar{
+.section .countries-cont .affected-cont::-webkit-scrollbar{
     display: none;
 }
+
+.section .countries-cont .affected-cont {
+    overflow-y: scroll;
+    height:400px;
+}
 .section .countries-cont .affected-cont .card-cont{
-    width:100%;
     height:auto;
     background: #e9e7e7;
     overflow: hidden;

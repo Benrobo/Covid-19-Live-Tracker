@@ -13,7 +13,7 @@ async function getdata(){
     let oup = [];
     oup.push(response)
     let newdata = oup.map((data)=>{
-        console.log(data);
+        // console.log(data);
         let date = Object.keys(data.cases);
         let recovered = Object.values(data.recovered);
         let death = Object.values(data.deaths);
@@ -22,7 +22,7 @@ async function getdata(){
         let fmatCase = numeral(total[total.length-1]).format('0,0');
         let fmatRecovered = numeral(recovered[recovered.length-1]).format('0,0');
 
-        let objTest = {fmatCase, fmatDeath, fmatRecovered}
+        // let objTest = {fmatCase, fmatDeath, fmatRecovered}
         showCounts(fmatCase, fmatDeath, fmatRecovered)
     })
 }
@@ -40,6 +40,72 @@ function showCounts(fmatCase, fmatDeath, fmatRecovered){
     death.textContent = `${fmatDeath}`;
     
 }
+
+function showMaps(){
+
+}
+
+
+async function getCountries(){
+    let COUNTRY_API = "https://restcountries.eu/rest/v2/";
+    let result = await fetch(COUNTRY_API);
+    let data = await result.json();
+    let dropdown = document.querySelector('.countries');
+    dropdown.setAttribute("class", "form-control ml-1 countries")
+    dropdown.style.width = "170px"
+    let form = document.querySelector(".countries-form-cont");
+    
+    data.map((data)=>{
+        let name = data['name']
+        let flag = data['flag']
+        let option = document.createElement('option');
+        option.value = name;
+        option.innerHTML = name;
+        dropdown.appendChild(option)
+    })
+    form.appendChild(dropdown)
+}
+getCountries()
+
+
+async function showcard(){
+    let COUNTRY_API = "https://restcountries.eu/rest/v2/";
+    let affectedcont = document.querySelector(".affected-cont");
+    let result = await fetch(COUNTRY_API);
+    let data = await result.json();
+    let oup;
+    data.map((data)=>{
+        let name = data['name']
+        let flag = data['flag']
+        let cardCont = document.createElement("div")
+        cardCont.setAttribute("class", "card-cont")
+        cardCont.innerHTML = `
+            <div class="clear-fix">
+                <div class="float-left">
+                    <img src="${flag}" alt="flag">
+                    <small class="ml-1">${name}</small>
+                </div>
+
+                <div class="float-right">
+                    <small class="mr-1">1123.5</small>
+                </div>
+            </div>
+        `;
+        affectedcont.appendChild(cardCont)
+    })
+}
+showcard()
+// function populateDropdwn(name){
+//     let dropdown = document.querySelector('.countries');
+//     let form = document.mquerySelector(".countries-form-cont");
+//     dropdown.innerHTML = `
+//         <select class="form-control countries">
+//         <option value="">Select Country</option>
+//         <option value="">Global</option>
+//         <option value="${name}">${name}</option>
+//         </select>
+//     `;
+// }
 // api
 // https://api.kawalcorona.com/
 // countries api : https://restcountries.eu/rest/v2/name/nigeria
