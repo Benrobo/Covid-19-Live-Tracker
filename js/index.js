@@ -1,4 +1,4 @@
-const COUNTRY_API = "https://restcountries.eu/rest/v2/";
+const COUNTRY_API = "https://corona.lmao.ninja/v2/countries/";
 const CASE_API = "https://api.covid19api.com/summary";
 const CASE_API_Country = "https://disease.sh/v3/covid-19/countries";
 
@@ -14,9 +14,7 @@ async function getdata(){
     let oup = [];
     oup.push(response)
     let newdata = oup.map((data)=>{
-        console.log(data);
         let {TotalConfirmed , TotalRecovered, TotalDeaths} = data.Global
-        console.log(TotalConfirmed);
         let recovered = TotalRecovered;
         let death = TotalDeaths;
         let total = TotalConfirmed;
@@ -24,7 +22,6 @@ async function getdata(){
         let fmatCase = numeral(total).format('0,0');
         let fmatRecovered = numeral(recovered).format('0,0');
 
-        // let objTest = {fmatCase, fmatDeath, fmatRecovered}
         showCounts(fmatCase, fmatDeath, fmatRecovered)
     })
 }
@@ -58,7 +55,7 @@ async function getCountries(){
     let form = document.querySelector(".countries-form-cont");
     
     data.map((data)=>{
-        let name = data['name']
+        let name = data['country']
         let option = document.createElement('option');
         option.value = name;
         option.innerHTML = name;
@@ -74,14 +71,15 @@ async function showcard(){
     let result = await fetch(CASE_API_Country);
     let data = await result.json();
     data.map((data)=>{
-        let name = data['country']
-        let cases = data['cases']
+        let name = data.country
+        let flag = data.countryInfo.flag
+        let cases = data.cases
         let cardCont = document.createElement("div")
         cardCont.setAttribute("class", "card-cont")
         cardCont.innerHTML = `
             <div class="clear-fix">
                 <div class="float-left">
-                    <img alt="flag" class="flag-img">
+                    <img src="${flag}" alt="flag" class="flag-img">
                     <small class="ml-1">${name}</small>
                 </div>
 
@@ -93,25 +91,10 @@ async function showcard(){
         affectedcont.appendChild(cardCont)
     })
     
-    appendCountryFlag();
 }
 
 
-async function appendCountryFlag(){
 
-    let result = await fetch(COUNTRY_API);
-    let data = await result.json();
-    let flag = document.querySelectorAll(".flag-img")
-    let flagsrc = data.map((data)=>{
-        let src = data.flag;
-        return src
-    })
-    console.log();
-    flag.forEach((img)=>{
-        // img.src = flagsrc;
-        console.log(data.flag);
-    })
-}
 
 
 // api
