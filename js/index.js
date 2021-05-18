@@ -1,7 +1,11 @@
 const COUNTRY_API = "https://corona.lmao.ninja/v2/countries/";
 const CASE_API = "https://api.covid19api.com/summary";
 const CASE_API_Country = "https://disease.sh/v3/covid-19/countries";
-
+let cases = document.querySelector(".cases")
+let recoverd = document.querySelector(".recovered")
+let death = document.querySelector(".death")
+let countryselect = document.querySelector(".countries")
+let filterbtn = document.querySelector(".filterbtn")
 // get Covid19 cases
 async function getcases(){
     let res = await fetch(CASE_API);
@@ -30,10 +34,7 @@ getdata()
 
 
 function showCounts(fmatCase, fmatDeath, fmatRecovered){
-    let cases = document.querySelector(".cases")
-    let recoverd = document.querySelector(".recovered")
-    let death = document.querySelector(".death")
-
+    // if the select tag is changed
     cases.textContent = `${fmatCase}`;
     recoverd.textContent = `${fmatRecovered}`;
     death.textContent = `${fmatDeath}`;
@@ -41,8 +42,33 @@ function showCounts(fmatCase, fmatDeath, fmatRecovered){
 
 }
 
-function showMaps(){
 
+function handleFilter(){
+
+    filterbtn.onclick = async (e)=>{
+        e.preventDefault()
+        let res = await fetch(`https://corona.lmao.ninja/v2/countries/${countryselect.value}`);
+        
+        // country info
+        let {lat, long} = data.countryInfo;
+
+        let data = await res.json();
+        let recovered = numeral((Math.round(data.recovered))).format('0,0');
+        let deaths = numeral((Math.round(data.deathsPerOneMillion))).format('0,0') + "M";
+        let total = numeral((Math.round(data.recoveredPerOneMillion))).format('0,0') + "M";
+        console.log(total);
+        
+        cases.textContent = `${total}`;
+        recoverd.textContent = `${recovered}`;
+        death.textContent = `${deaths}`;
+
+        showMaps(lat, long)
+    }
+}
+handleFilter()
+
+function showMaps(lat, long){
+    
 }
 
 
