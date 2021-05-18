@@ -49,10 +49,10 @@ function handleFilter(){
         e.preventDefault()
         let res = await fetch(`https://corona.lmao.ninja/v2/countries/${countryselect.value}`);
         
-        // country info
-        let {lat, long} = data.countryInfo;
 
         let data = await res.json();
+        // country info
+        let {lat, long} = data.countryInfo;
         let recovered = numeral((Math.round(data.recovered))).format('0,0');
         let deaths = numeral((Math.round(data.deathsPerOneMillion))).format('0,0') + "M";
         let total = numeral((Math.round(data.recoveredPerOneMillion))).format('0,0') + "M";
@@ -68,7 +68,17 @@ function handleFilter(){
 handleFilter()
 
 function showMaps(lat, long){
-    
+    // let map = document.querySelector("#coro-map");
+    var mymap = L.map('coro-map').setView([lat, long], 13);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
 }
 
 
