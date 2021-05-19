@@ -7,6 +7,8 @@ let recoverd = document.querySelector(".recovered");
 let death = document.querySelector(".death");
 let countryselect = document.querySelector(".countries");
 let filterbtn = document.querySelector(".filterbtn");
+// chart
+var ctx = document.getElementById("myChart");
 
 window.addEventListener("DOMContentLoaded", (e) => {});
 
@@ -92,17 +94,15 @@ async function getCountries() {
 }
 getCountries();
 
-async function showMap() {
-  let req = await fetch(COUNTRY_API);
-  let res = await req.json()
+// async function showMap() {
+//   let req = await fetch(COUNTRY_API);
+//   let res = await req.json();
 
+//   // var mymap = L.map('coro-map').setView([lat,long], 13);
 
- 
-  // var mymap = L.map('coro-map').setView([lat,long], 13);
-
-  // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
-}
-showMap();
+//   // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
+// }
+// showMap();
 
 async function showcard() {
   let affectedcont = document.querySelector(".affected-cont");
@@ -134,38 +134,56 @@ async function showcard() {
 // https://api.kawalcorona.com/
 // countries api : https://restcountries.eu/rest/v2/name/nigeria
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
+async function covidChart() {
+  let result = await fetch(
+    "https://disease.sh/v3/covid-19/historical/all"
+  );
+  let data = await result.json();
+  let dates = Object.keys(data.cases);
+  let total = Object.values(data.cases);
+  let deaths = Object.values(data.deaths);
+  let recovered = Object.values(data.recovered);
+
+    // console.log(recovered);
+    // // console.log(data);
+    // return;
+  var myChart = new Chart(ctx, {
+    type: "line",
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+      labels: dates,
+      datasets: [
+        {
+            label: 'Total Cases',
+            data: total,
+            backgroundColor:'rgba(255, 99, 132, 0.2)',
+            borderColor:'black',
             borderWidth: 1
-        }]
+          },
+          {
+            label: 'Recovered Cases',
+            data: recovered,
+            borderColor: 'green',
+            fill: false,
+          },
+          {
+            label: 'Deaths',
+            data: deaths,
+            borderColor: 'red',
+            fill: false,
+          },
+      ],
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+covidChart();
+
+
+// if dropdown value is changed
