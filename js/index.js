@@ -8,6 +8,7 @@ let death = document.querySelector(".death");
 let countryselect = document.querySelector(".countries");
 let filterbtn = document.querySelector(".filterbtn");
 // chart
+let chartcont = document.querySelector(".chart-container")
 var ctx = document.getElementById("myChart");
 
 window.addEventListener("DOMContentLoaded", (e) => {});
@@ -67,6 +68,7 @@ function handleFilter() {
     death.textContent = `${deaths}`;
 
     // showMaps(lat, long, name);
+    showChartOfCountry(countryselect.value)
   };
 }
 handleFilter();
@@ -186,4 +188,59 @@ async function covidChart() {
 covidChart();
 
 
-// if dropdown value is changed
+// if dropdown value is changed and filterbutton is clicked
+async function showChartOfCountry(countryName){
+    if(chartcont.innerHTML !== ""){
+        chartcont.innerHTML == "";
+    }else{
+        
+        let result = await fetch(
+            `https://disease.sh/v3/covid-19/historical/${countryName}`
+        );
+        let data = await result.json();
+
+        let dates = Object.keys(data.timeline.cases);
+        let total = Object.values(data.timeline.cases);
+        let deaths = Object.values(data.timeline.deaths);
+        let recovered = Object.values(data.timeline.recovered);
+            
+        //   console.log(recovered[recovered.length-1]);
+        //   return;
+        var myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Total Cases: ' + total[total.length-1],
+                    data: total,
+                    backgroundColor:'rgba(255, 99, 132, 0.2)',
+                    borderColor:'black',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Recovered Cases: ' + recovered[recovered.length-1],
+                    data: recovered,
+                    borderColor: 'green',
+                    fill: false,
+                },
+                {
+                    label: 'Deaths: ' + deaths[deaths.length-1],
+                    data: deaths,
+                    borderColor: 'red',
+                    fill: false,
+                },
+            ],
+            },
+            options: {
+            responsive: true,
+            scales: {
+                y: {
+                beginAtZero: true,
+                },
+            },
+            },
+        });
+    }
+      
+}
