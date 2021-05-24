@@ -237,22 +237,6 @@ async function showChartOfCountry(countryName) {
 
 
 async function displayCovidDataBasedOnFilter(name,flag, total, recovered, deaths){
-    let res = await fetch(
-      `https://disease.sh/v3/covid-19/countries/${countryselect.value}`
-    );
-
-    // let data = await res.json();
-    // let name = data.country;
-    // let flag = data.countryInfo.flag;
-    // console.log(data);
-    // return;
-    // country info
-    // let recovered = numeral(Math.round(data.recovered)).format("0,0");
-    // let deaths =
-    //   numeral(Math.round(data.deaths)).format("0,0");
-    // let total =
-    // numeral(Math.round(data.cases)).format("0,0");
-
     countryInfoCountainer.innerHTML = `
     <h4>${name}</h4>
     <div class="cont country-info">
