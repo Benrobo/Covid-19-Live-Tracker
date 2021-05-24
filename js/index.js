@@ -250,9 +250,9 @@ function displayCovidDataBasedOnFilter(name,flag, total, recoverd, deaths){
     // country info
     let recovered = numeral(Math.round(data.recovered)).format("0,0");
     let deaths =
-      numeral(Math.round(data.deathsPerOneMillion)).format("0,0") + "M";
+      numeral(Math.round(data.deathsPerOneMillion)).format("0,0");
     let total =
-    numeral(Math.round(data.recoveredPerOneMillion)).format("0,0") + "M";
+    numeral(Math.round(data.recoveredPerOneMillion)).format("0,0");
 
     countryInfoCountainer.innerHTML = `
     <h4>${name}</h4>
