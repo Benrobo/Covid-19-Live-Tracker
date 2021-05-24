@@ -56,13 +56,14 @@ function handleFilter() {
 
     let data = await res.json();
     let name = data.country;
+    let flag = data.countryInfo.flag;
     // country info
     let { lat, long } = data.countryInfo;
     let recovered = numeral(Math.round(data.recovered)).format("0,0");
     let deaths =
-      numeral(Math.round(data.deathsPerOneMillion)).format("0,0") + "M";
+      numeral(Math.round(data.deathsPerOneMillion)).format("0,0")
     let total =
-      numeral(Math.round(data.recoveredPerOneMillion)).format("0,0") + "M";
+      numeral(Math.round(data.recoveredPerOneMillion)).format("0,0")
 
     cases.textContent = `${total}`;
     recoverd.textContent = `${recovered}`;
@@ -70,7 +71,7 @@ function handleFilter() {
 
     // showMaps(lat, long, name);
     showChartOfCountry(countryselect.value);
-    displayCovidDataBasedOnFilter(name, total, recoverd, deaths)
+    displayCovidDataBasedOnFilter(name, flag, total, recovered, deaths)
   };
 }
 handleFilter();
@@ -235,24 +236,22 @@ async function showChartOfCountry(countryName) {
 }
 
 
-function displayCovidDataBasedOnFilter(name,flag, total, recoverd, deaths){
-  filterbtn.onclick = async (e) => {
-    e.preventDefault();
+async function displayCovidDataBasedOnFilter(name,flag, total, recovered, deaths){
     let res = await fetch(
       `https://disease.sh/v3/covid-19/countries/${countryselect.value}`
     );
 
-    let data = await res.json();
-    let name = data.country;
-    let flag = data.countryInfo.flag;
-    console.log(data);
+    // let data = await res.json();
+    // let name = data.country;
+    // let flag = data.countryInfo.flag;
+    // console.log(data);
     // return;
     // country info
-    let recovered = numeral(Math.round(data.recovered)).format("0,0");
-    let deaths =
-      numeral(Math.round(data.deaths)).format("0,0");
-    let total =
-    numeral(Math.round(data.cases)).format("0,0");
+    // let recovered = numeral(Math.round(data.recovered)).format("0,0");
+    // let deaths =
+    //   numeral(Math.round(data.deaths)).format("0,0");
+    // let total =
+    // numeral(Math.round(data.cases)).format("0,0");
 
     countryInfoCountainer.innerHTML = `
     <h4>${name}</h4>
@@ -274,27 +273,5 @@ function displayCovidDataBasedOnFilter(name,flag, total, recoverd, deaths){
         </div>
     </div>
   `;
-  };
-
-  countryInfoCountainer.innerHTML = `
-  <h4>${name}</h4>
-  <div class="cont country-info">
-      <!-- country flag -->
-      <br>
-      <img src="${flag}" alt="flag" class="country-flag">
-      <div class="total-cases">
-          <b>Total Cases</b>
-          <h2>${total}</h2>
-      </div>
-      <div class="total-recov">
-          <b>Recovered</b>
-          <h2>${recoverd}</h2>
-      </div>
-      <div class="total-death">
-          <b>Deaths</b>
-          <h2>${deaths}</h2>
-      </div>
-  </div>
-`;
 }
 displayCovidDataBasedOnFilter("Afghanistan","https://disease.sh/assets/img/flags/af.png", 66275, 345, 12345)
