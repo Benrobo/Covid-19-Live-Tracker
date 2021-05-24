@@ -1,6 +1,6 @@
 ## CoronaVirus Tracker
 
-#### This tracker provides the number of cases and deaths from novel coronavirus by country, the trend in case and death counts by country, also display in chart view Check it 
+#### This tracker provides the number of cases and deaths from novel coronavirus by country, the trend in case and death counts by country, also display in chart view Check it https://benrobo-coronavirus-tracker.netlify.app/
 
 <img src="https://github.com/Benrobo/Covid-19-Live-Tracker/blob/main/pic.png">
 
