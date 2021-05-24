@@ -1,26 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
-@import url('responsive.css');
 
 body{
     width:100%;
     height:100vh;
-    background-position: center;
-    background-size:cover;
-    font-family: 'Poppins', sans-serif !important;
-    background: #F2F3F7;
+    font-family: 'Poppins', sans-serif;
+    background: #3e6bce;
 }
 
 
 
 .section{
     width:70%;
-    height:100vh;
     position: relative;
     top:0px;
     left:0px;
     margin:0px auto;
+    background: rgba( 255, 255, 255, 0.40 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 0.0px );
+    -webkit-backdrop-filter: blur( 0.0px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
+
+.section .link{
+    padding:12px;
+    margin:10px auto;
+    background: rgba(255, 255, 255, 0.178);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 0.0px );
+    -webkit-backdrop-filter: blur( 0.0px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 10px;
+}
+
 .section .counts-cont{
     width: 90%;
     border-radius: 10px;
@@ -28,7 +41,6 @@ body{
     display:flex;
     margin:10px auto;
     display:flex;
-    align-items: center;
     justify-content: space-around;
     box-shadow: 0px 0px 3px #777;
     padding:12px;
@@ -36,6 +48,7 @@ body{
 }
 .section .counts-cont .box{
     text-align:center;
+    margin:10px auto;
 }
 .section .counts-cont .box .stat-val{
     font-weight: 600;
@@ -51,18 +64,63 @@ body{
 
 .section .map-cont{
     width: 55%;
-    height:500px;
-    padding:12px;
+    height:auto;
+    padding:0px !important;
     background:#fff;
     box-shadow: 0px 0px 7px #cccccca8;
     margin:10px auto;
     border-radius:7px;
 }
-.section .map-cont .map-area{
-    /* background: #ccc; */
-    width:100%;
-    height:400px;
+
+.section .covid-country-area .cont{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin:10px auto;
 }
+
+
+.section .covid-country-area .country-flag{
+    width: 150px;
+    height: 90px;
+    padding:6px;
+    border-radius: 5px;
+    margin:10px;
+    box-shadow: 0px 0px 3px #ccc;
+}
+
+.section .covid-country-area .total-cases{
+    width: 200px;
+    height: 90px;
+    padding:12px;
+    border-left:3px solid rgb(19, 153, 241);
+    border-radius: 5px;
+    margin:10px;
+    box-shadow: 0px 0px 3px #ccc;
+}
+
+.section .covid-country-area .total-recov{
+    width: 150px;
+    height: 90px;
+    padding:12px;
+    border-left:3px solid green;
+    border-radius: 5px;
+    margin:10px;
+    box-shadow: 0px 0px 3px #ccc;
+}
+.section .covid-country-area .total-death{
+    width: 200px;
+    height: 90px;
+    padding:12px;
+    border-left:3px solid red;
+    border-radius: 5px;
+    margin:10px;
+    box-shadow: 0px 0px 3px #ccc;
+
+}
+
+
+
 .section .countries-cont{
     width: 300px;
     padding:12px;
@@ -78,7 +136,7 @@ body{
 
 .section .countries-cont .affected-cont {
     overflow-y: scroll;
-    height:400px;
+    height:200px;
 }
 .section .countries-cont .affected-cont .card-cont{
     height:auto;
@@ -97,6 +155,7 @@ body{
 .chart-cont{
     width:100%;
     padding:10px;
+    background: #fff;
 }
 .chart-cont .chart-js{
     height:40vh !important; 
@@ -107,3 +166,58 @@ body{
     width: 300px !important;
     height: 300px !important;
 } */
+
+
+
+ @media(max-width: 768px){
+    .section{
+        width:100% !important;
+    }
+    .section .counts-cont{
+        position: relative;
+        transform:translate(0,0);
+        top:0px;
+        width:100% !important;
+        background: none !important;
+        box-shadow: none !important;
+    }
+    .section .counts-cont .box{
+        padding:10px;
+        background: #fff;
+        box-shadow: 0px 0px 3px #fff;
+        width:170px;
+        height:auto;
+        margin:10px !important;
+        border-radius:10px;
+    }
+    .section .main{
+        width: 100% !important;
+    }
+    .section .map-cont{
+        width: 100%;
+        height:auto;
+        padding:12px;
+        background:#fff;
+        box-shadow: 0px 0px 7px #cccccca8;
+        margin:10px auto;
+        border-radius:7px;
+    }
+    .section .countries-cont{
+        width: 100% !important;
+    }
+    .section .countries-cont form .countries{
+        width:270px !important;
+    }
+    .section .covid-country-area .cont{
+        flex-wrap: wrap !important;
+        align-items:none !important;
+        justify-content: none !important;
+        margin:10px !important;
+    }
+    .section .covid-country-area .country-flag{
+        width: 100px;
+    }
+    .section .covid-country-area .total-death{
+        width: 150px;
+    }
+}

@@ -9,19 +9,21 @@
     <link rel="icon"
         href="https://img-premium.flaticon.com/png/512/2853/2853896.png?token=exp=1621251844~hmac=29db70baf58b202016090e3dc351f98f"
         type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
 
-    <!-- Mapbox -->
-    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
-    
-    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <!-- iionsicon -->
     <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
 </head>
 
 <body>
     <section class="section">
+        <h1 class="text-center">Corona Virus Tracker</h1>
+        <br>
+        <div class="link-cont">
+            <a href="" class="link"><img src="https://img.icons8.com/material-sharp/48/000000/github.png"/></a>
+        </div>
+        <br>
         <div class="counts-cont">
             <div class="box">
                 <div class="icon"><img src="https://img.icons8.com/wired/50/4a90e2/globe.png" /></div>
@@ -52,16 +54,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- main -->
-        <br>
-        <br>
         <br>
         <div class="main">
             <div class="map-cont">
-                <p><b>Covid-19 Affected Areas.</b></p>
-                <br>
-                <div class="map-area"  id="coro-map"></div>
+                <div class="covid-country-area">
+                    <div class="cont country-info">
+                    </div>
+                </div>
             </div>
             <div class="countries-cont">
                 <div class="form-cont">

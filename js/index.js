@@ -7,6 +7,7 @@ let recoverd = document.querySelector(".recovered");
 let death = document.querySelector(".death");
 let countryselect = document.querySelector(".countries");
 let filterbtn = document.querySelector(".filterbtn");
+let countryInfoCountainer = document.querySelector(".country-info")
 // chart
 let chartcont = document.querySelector(".chart-container");
 var ctx = document.getElementById("myChart");
@@ -69,6 +70,7 @@ function handleFilter() {
 
     // showMaps(lat, long, name);
     showChartOfCountry(countryselect.value);
+    displayCovidDataBasedOnFilter(name, total, recoverd, deaths)
   };
 }
 handleFilter();
@@ -231,3 +233,68 @@ async function showChartOfCountry(countryName) {
   });
   chartcont.appendChild(canvas)
 }
+
+
+function displayCovidDataBasedOnFilter(name,flag, total, recoverd, deaths){
+  filterbtn.onclick = async (e) => {
+    e.preventDefault();
+    let res = await fetch(
+      `https://disease.sh/v3/covid-19/countries/${countryselect.value}`
+    );
+
+    let data = await res.json();
+    let name = data.country;
+    let flag = data.countryInfo.flag;
+    console.log(data);
+    // return;
+    // country info
+    let recovered = numeral(Math.round(data.recovered)).format("0,0");
+    let deaths =
+      numeral(Math.round(data.deathsPerOneMillion)).format("0,0") + "M";
+    let total =
+    numeral(Math.round(data.recoveredPerOneMillion)).format("0,0") + "M";
+
+    countryInfoCountainer.innerHTML = `
+    <h4>${name}</h4>
+    <div class="cont country-info">
+        <!-- country flag -->
+        <br>
+        <img src="${flag}" alt="flag" class="country-flag">
+        <div class="total-cases">
+            <b>Total Cases</b>
+            <h2>${total}</h2>
+        </div>
+        <div class="total-recov">
+            <b>Recovered</b>
+            <h2>${recovered}</h2>
+        </div>
+        <div class="total-death">
+            <b>Deaths</b>
+            <h2>${deaths}</h2>
+        </div>
+    </div>
+  `;
+  };
+
+  countryInfoCountainer.innerHTML = `
+  <h4>${name}</h4>
+  <div class="cont country-info">
+      <!-- country flag -->
+      <br>
+      <img src="${flag}" alt="flag" class="country-flag">
+      <div class="total-cases">
+          <b>Total Cases</b>
+          <h2>${total}</h2>
+      </div>
+      <div class="total-recov">
+          <b>Recovered</b>
+          <h2>${recoverd}</h2>
+      </div>
+      <div class="total-death">
+          <b>Deaths</b>
+          <h2>${deaths}</h2>
+      </div>
+  </div>
+`;
+}
+displayCovidDataBasedOnFilter("Afghanistan","https://disease.sh/assets/img/flags/af.png", 66275, 345, 12345)
