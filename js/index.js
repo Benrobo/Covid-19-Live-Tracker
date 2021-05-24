@@ -8,7 +8,7 @@ let death = document.querySelector(".death");
 let countryselect = document.querySelector(".countries");
 let filterbtn = document.querySelector(".filterbtn");
 // chart
-let chartcont = document.querySelector(".chart-container")
+let chartcont = document.querySelector(".chart-container");
 var ctx = document.getElementById("myChart");
 
 window.addEventListener("DOMContentLoaded", (e) => {});
@@ -68,7 +68,7 @@ function handleFilter() {
     death.textContent = `${deaths}`;
 
     // showMaps(lat, long, name);
-    showChartOfCountry(countryselect.value)
+    showChartOfCountry(countryselect.value);
   };
 }
 handleFilter();
@@ -95,16 +95,6 @@ async function getCountries() {
   // console.log(lat);
 }
 getCountries();
-
-// async function showMap() {
-//   let req = await fetch(COUNTRY_API);
-//   let res = await req.json();
-
-//   // var mymap = L.map('coro-map').setView([lat,long], 13);
-
-//   // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
-// }
-// showMap();
 
 async function showcard() {
   let affectedcont = document.querySelector(".affected-cont");
@@ -137,42 +127,40 @@ async function showcard() {
 // countries api : https://restcountries.eu/rest/v2/name/nigeria
 
 async function covidChart() {
-  let result = await fetch(
-    "https://disease.sh/v3/covid-19/historical/all"
-  );
+  let result = await fetch("https://disease.sh/v3/covid-19/historical/all");
   let data = await result.json();
   let dates = Object.keys(data.cases);
   let total = Object.values(data.cases);
   let deaths = Object.values(data.deaths);
   let recovered = Object.values(data.recovered);
 
-    // console.log(recovered);
-    // // console.log(data);
-    // return;
+  // console.log(recovered);
+  // // console.log(data);
+  // return;
   var myChart = new Chart(ctx, {
     type: "line",
     data: {
       labels: dates,
       datasets: [
         {
-            label: 'Total Cases',
-            data: total,
-            backgroundColor:'rgba(255, 99, 132, 0.2)',
-            borderColor:'black',
-            borderWidth: 1
-          },
-          {
-            label: 'Recovered Cases',
-            data: recovered,
-            borderColor: 'green',
-            fill: false,
-          },
-          {
-            label: 'Deaths',
-            data: deaths,
-            borderColor: 'red',
-            fill: false,
-          },
+          label: "Total Cases",
+          data: total,
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "black",
+          borderWidth: 1,
+        },
+        {
+          label: "Recovered Cases",
+          data: recovered,
+          borderColor: "green",
+          fill: false,
+        },
+        {
+          label: "Deaths",
+          data: deaths,
+          borderColor: "red",
+          fill: false,
+        },
       ],
     },
     options: {
@@ -187,60 +175,59 @@ async function covidChart() {
 }
 covidChart();
 
-
 // if dropdown value is changed and filterbutton is clicked
-async function showChartOfCountry(countryName){
-    if(chartcont.innerHTML !== ""){
-        chartcont.innerHTML == "";
-    }else{
-        
-        let result = await fetch(
-            `https://disease.sh/v3/covid-19/historical/${countryName}`
-        );
-        let data = await result.json();
+async function showChartOfCountry(countryName) {
+  chartcont.innerHTML = "";
+  
+  let canvas = document.createElement("canvas");
+  canvas.setAttribute("id", "myChart");
 
-        let dates = Object.keys(data.timeline.cases);
-        let total = Object.values(data.timeline.cases);
-        let deaths = Object.values(data.timeline.deaths);
-        let recovered = Object.values(data.timeline.recovered);
-            
-        //   console.log(recovered[recovered.length-1]);
-        //   return;
-        var myChart = new Chart(ctx, {
-            type: "line",
-            data: {
-            labels: dates,
-            datasets: [
-                {
-                    label: 'Total Cases: ' + total[total.length-1],
-                    data: total,
-                    backgroundColor:'rgba(255, 99, 132, 0.2)',
-                    borderColor:'black',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Recovered Cases: ' + recovered[recovered.length-1],
-                    data: recovered,
-                    borderColor: 'green',
-                    fill: false,
-                },
-                {
-                    label: 'Deaths: ' + deaths[deaths.length-1],
-                    data: deaths,
-                    borderColor: 'red',
-                    fill: false,
-                },
-            ],
-            },
-            options: {
-            responsive: true,
-            scales: {
-                y: {
-                beginAtZero: true,
-                },
-            },
-            },
-        });
-    }
-      
+  let result = await fetch(
+    `https://disease.sh/v3/covid-19/historical/${countryName}`
+  );
+  let data = await result.json();
+
+  let dates = Object.keys(data.timeline.cases);
+  let total = Object.values(data.timeline.cases);
+  let deaths = Object.values(data.timeline.deaths);
+  let recovered = Object.values(data.timeline.recovered);
+
+  //   console.log(recovered[recovered.length-1]);
+  //   return;
+  var myChart = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: "Total Cases: " + total[total.length - 1],
+          data: total,
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "black",
+          borderWidth: 1,
+        },
+        {
+          label: "Recovered Cases: " + recovered[recovered.length - 1],
+          data: recovered,
+          borderColor: "green",
+          fill: false,
+        },
+        {
+          label: "Deaths: " + deaths[deaths.length - 1],
+          data: deaths,
+          borderColor: "red",
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+  chartcont.appendChild(canvas)
 }
