@@ -1,4 +1,3 @@
-alert("scsdcsdc")
 const COUNTRY_API = "https://corona.lmao.ninja/v2/countries/";
 const CASE_API = "https://api.covid19api.com/summary";
 const CASE_API_Country = "https://disease.sh/v3/covid-19/countries";
